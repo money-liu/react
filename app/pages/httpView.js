@@ -1,32 +1,60 @@
 'use strict';
 import React, { Component } from 'react';
-import {Text, StyleSheet, Image, View, ListView, TouchableOpacity, Platform, AsyncStorage, Navigator } from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ListView } from 'react-native';
+import Common from '../common/common';
 
 class HttpView extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.heading}>
-          <Text style={styles.headText}>
-            {'第一页'}
-          </Text>
-        </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={()=>this._navigate('你好! (来源第一页:右出)')}>
-          <Text style={styles.buttonText}>
-            {'跳转至第二页(右出)'}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={()=>this._navigate('你好! (来源第一页:底出)', 'Bottom')}>
-          <Text style={styles.buttonText}>
-            {'跳转至第二页(底部)'}
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
+      let rowDate = this.props.rowDate;
+      return (
+          <View>
+              <HeaderView
+                  titleView= {'详情介绍'}
+                  leftIcon={'angle-left'}
+                  leftIconAction={() => this.props.navigator.pop()}
+                  />
+                <ScrollView style={{ height: Common.window.height-64}}>
+                  <Text style = {styles.title} numberOfLines = {0}>{rowDate.title}</Text>
+                  <Image style = {styles.image_middle} source = {{uri: rowDate.thumbnail}}></Image>
+                  <WebView
+                   style = {styles.webview}
+                   html = {rowDate.content}
+                   automaticallyAdjustContentInsets = {true}
+                   javascriptEnabled = {true}>
+                  </WebView>
+                </ScrollView>
+          </View>
+      );
   }
 }
-module.export = HttpView;
+
+const styles = StyleSheet.create({
+  title: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginTop: 25,
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  image_middle: {
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    width: Common.window.width-40,
+    height: Common.window.width-40,
+  },
+  content: {
+    marginTop: 30,
+    marginLeft: 20,
+    marginRight: 20,
+  },
+
+  webview: {
+    marginTop: 30,
+    marginLeft: 20,
+    marginRight: 20,
+    width: Common.window.width-40,
+    height: Common.window.width-40,
+  },
+
+});

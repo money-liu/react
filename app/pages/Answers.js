@@ -12,17 +12,11 @@ import {
     Dimensions,
 } from 'react-native';
 
-
-
 import Common from '../common/common';
 import HeaderView from '../common/HeaderView';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RecipeAnswers from './Data/RecipeAnswers.json';
 import AnswersDetailIntroduce from '../pages/AnswersDetailIntroduce.js';
-
-
-
-
 
 class Class extends Component {
     constructor(props) {
@@ -34,44 +28,35 @@ class Class extends Component {
             }),
         };
     }
-
     render() {
         const {Class} = this.props;
-        // console.log(this.props);
-        // let classList = Class.ClassDate;
         let classList = RecipeAnswers.section;
-
-
         return (
             <View>
-                <HeaderView
-                    titleView= '客服'
-                    />
+                <HeaderView titleView= '客服' />
                 {
-                    <ListView
-                        dataSource={this.state.dataSource.cloneWithRows(classList) }
-                        renderRow={this._renderRow}
-                        enableEmptySections={true}
-                        initialListSize= {10}
-                        style={{ height: Common.window.height - 40 - 64 }}
-                        />
+                  <ListView
+                      dataSource={this.state.dataSource.cloneWithRows(classList) }
+                      renderRow={this._renderRow}
+                      enableEmptySections={true}
+                      initialListSize= {10}
+                      style={{ height: Common.window.height - 40 - 64 }}
+                      />
                 }
             </View>
         );
 
     }
 
-    renderRow(rowDate) {
-        // console.log(rowDate);
+    renderRow(rowDate) {    // 渲染场景
         return (
-
             <TouchableOpacity
                 activeOpacity={0.75}
                 onPress={() => this._onPressFeedItem(rowDate.item) }
                 style={styles.center}
                 >
                 <View style = {styles.container}>
-                   <Image style = {styles.image_left} source = {{uri: rowDate.url + '.jpg'}}></Image>
+                   <Image style = {styles.image_left} source = {{uri: rowDate.url}}></Image>
                    <View style = {styles.right_view}>
                       <Text style = {styles.title}>{rowDate.name}</Text>
                       <Icon color="lightgrey" size={30} name='angle-right'/>
@@ -82,12 +67,12 @@ class Class extends Component {
         );
     }
     _onPressFeedItem(rowDate) {
-        InteractionManager.runAfterInteractions(() => {
+        InteractionManager.runAfterInteractions(() => {   //交互管理
             this.props.navigator.push({
-                name: rowDate.title,
-                component: AnswersDetailIntroduce,
+                name: rowDate.title,              // 页面标题
+                component: AnswersDetailIntroduce,    // 场景页面
                 passProps: {
-                    rowDate: rowDate,
+                    rowDate: rowDate,                //  场景数据
                 }
             })
         });

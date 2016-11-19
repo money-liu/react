@@ -25,12 +25,18 @@ class Class extends Component {
 		let classList = RecipeSection.section;
 		return (
           <View>
+					<Navigator
+					 style={{flex:1}}
+					 initialRoute={{component:'HttpView'}}
+					 configureScene={this.configureScene}
+					 renderScene={this.renderScene}
+					/>
             <HeaderView titleView='首页' />
             <ScrollView style={styles.scrllViewHeight}>
             <Figure/>
             <Classify/>
             <View>
-              <ListView 
+              <ListView
                  dataSource = {this.state.dataSource.cloneWithRows(classList)}
                  renderRow = {this._renderRow}
                  endableEmptySections = {true}
@@ -69,6 +75,15 @@ class Class extends Component {
 				}
 			})
 		})
+	}
+
+	configureScene(route) {
+	  return Navigator.SceneConfigs.PushFromRight;
+	}
+	renderScene(route, navigator) {
+	  if (route.name == 'HttpView') {
+	    return <HttpView navigator={navigator} {...route.passProps}/>
+	  }
 	}
 
 }

@@ -10,9 +10,6 @@ import AnswersContainers from '../containers/AnswersContainers1';
 import MoreContainer from '../containers/MoreContainer1';
 import CollectContainer from '../containers/CollectContainer1';
 
-
-
-
 const tabBarItems = [
     { title: '首页', icon: () => <Image style={{ width: 15, height: 15 }} source={require('../static/images/icon-home.png')}/>, component: RecipesContainers },
     { title: '客服', icon: () => <Image style={{ width: 15, height: 15 }} source={require('../static/images/icon-service.png')}/>, component: AnswersContainers },

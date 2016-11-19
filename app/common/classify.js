@@ -37,13 +37,8 @@ class Classify extends Component {
  render() {
     return (
         <View>
-         <Navigator
-           style={{flex:1}}
-           initialRoute={{component: HttpView}}
-           configureScene={this.configureScene}
-           renderScene={this.renderScene}/>
             <View style={styles.ClassMenu}>
-             <TouchableOpacity onPress={() => _navigator.push({title:'Http',id:'http'}) }>
+             <TouchableOpacity onPress={this._navigator}>
               <View style={styles.ClassifyBlock}>
                   <Image source={require('../static/images/icon-auction.png')} style={styles.ClassifyImg} />
                   <Text style={styles.ClassifyText}>极鲜拍</Text>
@@ -106,25 +101,8 @@ class Classify extends Component {
       return dataBlob;
     }
 
-configureScene(route, routeStak) {
-  return Navigator.SceneConfigs.PushFromRight;
-}
-renderScene(route, navigator) {
-  if (route.name == 'HttpView') {
-    return <FirstPage navigator={navigator} {...route.passProps}/>
-  } else if (route.name == 'SecondPage') {
-    return <SecondPage navigator={navigator} {...route.passProps}/>
-  }
-}
-_navigate(name, type = 'Normal') {
-   this.props.navigator.push({
-     component: SecondPage,
-     passProps: {
-       name: name
-     },
-     type: type
-   })
- }
+
+
 
 }
 

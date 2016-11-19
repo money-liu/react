@@ -10,15 +10,12 @@ import {
 } from 'react-native';
 
 import TabBarView from '../containers/TabBarView1';
-
 class App extends React.Component {
     render() {
-
         return (
             <View style={{ flex: 1 }}>
                 <Navigator
                     initialRoute={{ name: 'TabBarView', component: TabBarView }}
-
                     configureScene={(route) => {
                         if (route.sceneConfig) {
                             return route.sceneConfig;
@@ -36,5 +33,4 @@ class App extends React.Component {
         )
     }
 }
-
 export default App;

@@ -17,8 +17,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class AnswersDetailIntroduce extends Component {
     render() {
         let rowDate = this.props.rowDate;
-
-
         return (
             <View>
                 <HeaderView
@@ -29,7 +27,7 @@ export default class AnswersDetailIntroduce extends Component {
 
                   <ScrollView style={{ height: Common.window.height-64}}>
                     <Text style = {styles.title} numberOfLines = {0}>{rowDate.title}</Text>
-                    <Image style = {styles.image_middle} source = {{uri: rowDate.thumbnail + '.jpg'}}></Image>
+                    <Image style = {styles.image_middle} source = {{uri: rowDate.thumbnail}}></Image>
                     <WebView
                      style = {styles.webview}
                      html = {rowDate.content}
@@ -37,9 +35,6 @@ export default class AnswersDetailIntroduce extends Component {
                      javascriptEnabled = {true}>
                     </WebView>
                   </ScrollView>
-
-
-
             </View>
         );
     }
