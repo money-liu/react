@@ -26,12 +26,12 @@ module.exports = {
   title: {
     textAlign: 'left',
     fontSize: 14,
-    width:Common.window.width,
+    width:Common.window.width-85,
   },
   prompt_text: {
    color: '#3987ff',
    fontSize: 12,
-   width:Common.window.width,
+   width:Common.window.width-85,
   },
   right_view: {
     flex: 1,

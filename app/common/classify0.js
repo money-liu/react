@@ -40,6 +40,39 @@ class Classify extends Component {
  render() {
     return (
         <View>
+            <View style={styles.ClassMenu}>
+             <TouchableOpacity onPress={this.showDetails.bind(this)}>
+              <View style={styles.ClassifyBlock}>
+                  <Image source={require('../static/images/icon-auction.png')} style={styles.ClassifyImg} />
+                  <Text style={styles.ClassifyText}>极鲜拍</Text>
+               </View>
+                <HttpView navigator={this.props.navigator} />
+             </TouchableOpacity>
+             <TouchableOpacity onPress={this.rightAction}>
+               <View style={styles.ClassifyBlock} >
+                   <Image source={require('../static/images/icon-purchase.png')} style={styles.ClassifyImg}/>
+                   <Text style={styles.ClassifyText}>我要购买</Text>
+               </View>
+              </TouchableOpacity>
+             <TouchableOpacity onPress={this.rightAction}>
+               <View style={styles.ClassifyBlock} >
+                   <Image source={require('../static/images/icon-regular.png')} style={styles.ClassifyImg}/>
+                   <Text style={styles.ClassifyText}>定期购</Text>
+               </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.rightAction}>
+               <View style={styles.ClassifyBlock} >
+                   <Image source={require('../static/images/icon-vip.png')} style={styles.ClassifyImg}/>
+                   <Text style={styles.ClassifyText}>精英会员</Text>
+               </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.rightAction}>
+               <View style={styles.ClassifyBlock} >
+                 <Image source={require('../static/images/icon-logistics.png')} style={styles.ClassifyImg}/>
+                 <Text style={styles.ClassifyText}>物流/发票</Text>
+               </View>
+              </TouchableOpacity>
+            </View>
             <ListView
                initialListSize={13*2}
                contentContainerStyle={styles.list}

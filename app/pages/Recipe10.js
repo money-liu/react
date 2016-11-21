@@ -74,11 +74,6 @@ class Class extends Component {
 	configureScene(route) {
 	  return Navigator.SceneConfigs.PushFromRight;
 	}
-	renderScene(route, navigator) {
-	  if (route.name == 'HttpView') {
-	    return <HttpView navigator={navigator} {...route.passProps}/>
-	  }
-	}
 
 }
 

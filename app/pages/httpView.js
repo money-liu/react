@@ -1,60 +1,64 @@
 'use strict';
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ListView } from 'react-native';
+import {StyleSheet, View, Navigator, Text, Image, TouchableOpacity, ScrollView, ListView } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Common from '../common/common';
+import styles from '../common/style';
+import HeaderView from '../common/HeaderView';
+import RecipeSection from './Data/RecipeSection.json';
+import RecipeDetail from '../pages/RecipeDetail1';
 
-class HttpView extends Component {
+export default class HttpView extends Component {
+  constructor(props) {
+      super(props);
+      this._renderRow = this.renderRow.bind(this);
+      this.state = {
+          dataSource: new ListView.DataSource({
+              rowHasChanged: (row1, row2) => row1 !== row2,
+          }),
+      };
+  }
+
   render() {
-      let rowDate = this.props.rowDate;
+    const {Class} = this.props;
+    let classList = RecipeSection.section;
       return (
           <View>
-              <HeaderView
-                  titleView= {'详情介绍'}
-                  leftIcon={'angle-left'}
-                  leftIconAction={() => this.props.navigator.pop()}
-                  />
-                <ScrollView style={{ height: Common.window.height-64}}>
-                  <Text style = {styles.title} numberOfLines = {0}>{rowDate.title}</Text>
-                  <Image style = {styles.image_middle} source = {{uri: rowDate.thumbnail}}></Image>
-                  <WebView
-                   style = {styles.webview}
-                   html = {rowDate.content}
-                   automaticallyAdjustContentInsets = {true}
-                   javascriptEnabled = {true}>
-                  </WebView>
-                </ScrollView>
+            <HeaderView
+             titleView={'列表页面'}
+             leftIcon={'angle-left'}
+             leftIconAction={() => this.props.navigator.pop()}
+            />
+            <ScrollView style={styles.scrllViewHeight}>
+            <View>
+             <ListView
+               dataSource={this.state.dataSource.cloneWithRows(classList) }
+               renderRow={this._renderRow}
+               enableEmptySections={true}
+               initialListSize= {10}
+               />
+            </View>
+            </ScrollView>
           </View>
       );
-  }
+   }
+
+   renderRow(rowDate) {
+     return (
+       <TouchableOpacity
+           activeOpacity={0.75}
+           onPress={() =>this._onPressFeedItem(rowDate) }
+           style={styles.center}
+           >
+           <View style={styles.container}>
+            <Image style={styles.image_left} source={require('../static/images/product/productImg.png')} />
+            <View style={styles.right_view}>
+              <Text style = {styles.title}>商品名称</Text>
+              <Text style = {styles.prompt_text}>商品介绍</Text>
+             </View>
+           </View>
+      </TouchableOpacity>
+     )
+   }
+
 }
-
-const styles = StyleSheet.create({
-  title: {
-    textAlign: 'center',
-    fontSize: 18,
-    marginTop: 25,
-    marginLeft: 20,
-    marginRight: 20,
-  },
-  image_middle: {
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20,
-    width: Common.window.width-40,
-    height: Common.window.width-40,
-  },
-  content: {
-    marginTop: 30,
-    marginLeft: 20,
-    marginRight: 20,
-  },
-
-  webview: {
-    marginTop: 30,
-    marginLeft: 20,
-    marginRight: 20,
-    width: Common.window.width-40,
-    height: Common.window.width-40,
-  },
-
-});
