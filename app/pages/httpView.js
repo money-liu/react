@@ -7,6 +7,9 @@ import styles from '../common/style';
 import HeaderView from '../common/HeaderView';
 import RecipeSection from './Data/RecipeSection.json';
 import RecipeDetail from '../pages/RecipeDetail1';
+import ProductDetial from './productDetial';
+
+
 
 export default class HttpView extends Component {
   constructor(props) {
@@ -20,7 +23,7 @@ export default class HttpView extends Component {
   }
 
   render() {
-    const {Class} = this.props;
+    const {HttpView} = this.props;
     let classList = RecipeSection.section;
       return (
           <View>
@@ -43,22 +46,30 @@ export default class HttpView extends Component {
       );
    }
 
-   renderRow(rowDate) {
+   renderRow() {
      return (
        <TouchableOpacity
            activeOpacity={0.75}
-           onPress={() =>this._onPressFeedItem(rowDate) }
+           onPress={this._onPressFeedItem.bind(this) }
            style={styles.center}
            >
            <View style={styles.container}>
-            <Image style={styles.image_left} source={require('../static/images/product/productImg.png')} />
-            <View style={styles.right_view}>
-              <Text style = {styles.title}>商品名称</Text>
-              <Text style = {styles.prompt_text}>商品介绍</Text>
-             </View>
+            <View style={styles.ProductCont}>
+              <Text style = {styles.productName}>商品名称</Text>
+              <Text style = {styles.productBrand}>Dolobster</Text>
+              <Text style = {styles.productName}>10~1.5lbs</Text>
+              <Text style = {styles.productBrand}>断大脚</Text>
+              <Text style = {styles.productPrice}>¥75.5</Text>
+              <Text style = {styles.productCart}><Image source={require('../static/images/icon-cartD.png')} style={styles.productIconCart} /></Text>
+            </View>
            </View>
-      </TouchableOpacity>
+          </TouchableOpacity>
      )
+   }
+   _onPressFeedItem() {
+     this.props.navigator.push({
+       component: ProductDetial,
+     })
    }
 
 }

@@ -91,5 +91,36 @@ ClassifyBlock: {
 ClassifyText: {
   fontSize: 12,
 },
+ProductCont: {
+  width: Common.window.width,
+  flex:1,
+  flexWrap:'wrap',
+  flexDirection:'row',
+  paddingTop:5,
+},
+productName: {
+  flex:1,
+  fontSize:12,
+  color:'#333',
+},
+productBrand: {
+  flex:1,
+  color:'#666',
+  fontSize: 12,
+},
+productPrice: {
+  fontSize:16,
+  color: '#000',
+  flex:1,
+},
+productCart: {
+  flex:1,
+},
+productIconCart: {
+  width:18,
+  height:18,
+  justifyContent:'center',
+  alignItems:'center',
+}
 
 };
