@@ -68,8 +68,9 @@ export default class HttpView extends Component {
    }
    _onPressFeedItem() {
      this.props.navigator.push({
+       name: 'ProductDetial',
        component: ProductDetial,
-     })
+     });
    }
 
 }

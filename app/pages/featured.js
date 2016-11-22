@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {Text,StyleSheet,Image,View } from 'react-native';
 import ViewPager from 'react-native-viewpager';
-import Common from './common';
-var postUrl = 'http://10.10.20.40:8080/no/client?disclass=product&action=gfreshHome&PortID=1';
+import Common from '../common/common';
+import styles from '../common/style';
+var postUrl = 'http://10.10.20.40:8080/no/client?disclass=product&action=getProductByAreaOrCategory&AreaID=1&ByPrice=&BySaled=1&CategoryID=&PortID=1';
 
-export default class HelloWorldApp extends Component {
-
+export default class Featured extends Component {
 constructor(props) {
       super(props);
       // 用于构建DataSource对象
@@ -27,7 +27,7 @@ BannerDate() {
    .then((response) => response.json())
    .then((success) => {
      this.setState({
-       dataSource1: this.state.dataSource1.cloneWithPages(success.data.bananerList)
+       dataSource1: this.state.dataSource1.cloneWithPages(success.data.ProductPNameList)
      })
    })
 }
@@ -45,31 +45,26 @@ BannerDate() {
 render() {
     return (
     <View style={{flex:1}}>
-    <ViewPager
-        dataSource={this.state.dataSource1}
-        renderPage={this._renderPage.bind(this)}
-        isLoop={true}
-        autoPlay={true}/>
-        </View>
+      <ViewPager
+          dataSource={this.state.dataSource1}
+          renderPage={this._renderPage.bind(this)
+          }
+      />
+    </View>
     );
   }
 
   _renderPage(rowData) {
+    console.log(rowData.PhonePath+rowData.PhoneImg);
     return (
-        <Image source={{uri:rowData.FilePathMobile+rowData.FileNameMobile}} style={styles.page}/>
+        <View style={{width:Common.window.width/2,margin:10,}}>
+          <Image source={{uri:rowData.PhonePath+rowData.PhoneImg}} style={styles.featuredImg}/>
+          <View style={styles.feactedCent}>
+            <Text>{rowData.CNProductName}</Text>
+            <Text>¥<Text style={styles.FperPrice}>{rowData.PerPrice }</Text>/500g</Text>
+          </View>
+        </View>
     )
   }
 
 }
-
-
-
-const styles = StyleSheet.create({
-    page: {
-        flex: 1,
-        height:220,
-        width: Common.window.width,
-        resizeMode: 'stretch'
-    }
-})
-module.exports = HelloWorldApp;

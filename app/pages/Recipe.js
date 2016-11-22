@@ -9,11 +9,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import RecipeSection from './Data/RecipeSection.json';
 import RecipeDetail from '../pages/RecipeDetail1';
 import HttpView from '../pages/httpView';
+import Featured from '../pages/featured';
 
-class Class extends Component {
+export default class Class extends Component {
     constructor(props) {
         super(props);
-        this._renderRow = this.renderRow.bind(this);
+        //this._renderRow = this.renderRow.bind(this);
         this.state = {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
@@ -67,36 +68,42 @@ class Class extends Component {
                 </TouchableOpacity>
               </View>
               <Classify/>
-                 <View>
-                  <ListView
-                    dataSource={this.state.dataSource.cloneWithRows(classList) }
-                    renderRow={this._renderRow}
-                    enableEmptySections={true}
-                    initialListSize= {10}
-                    />
-                 </View>
-               </ScrollView>
+              <View style={styles.FeaturedBlock}>
+               <View style={styles.FeaturedFlex}>
+                 <Text style={styles.FeaturedTitle}>特别推荐</Text>
+                 <Image source={require('../static/images/icon-Featured.png')} style={styles.FeaturedIcon} />
+               </View>
+               <Featured/>
+              </View>
+              <View style={styles.FeaturedBlock}>
+               <View style={styles.FeaturedFlex}>
+                 <Text style={styles.FeaturedTitle}>推荐品牌</Text>
+                 <Image source={require('../static/images/icon-Recommend.png')} style={styles.FeaturedIcon1} />
+               </View>
+               <Featured/>
+              </View>
+            </ScrollView>
            </View>
         );
     }
 
-    renderRow(rowDate) {
-        return (
-            <TouchableOpacity
-                activeOpacity={0.75}
-                onPress={() =>this._onPressFeedItem(rowDate) }
-                style={styles.center}
-                >
-                <View style = {styles.container}>
-                   <Image style = {styles.image_left} source = {{uri: rowDate.url}} />
-                   <View style = {styles.right_view}>
-                      <Text style = {styles.title}>{rowDate.name}</Text>
-                      <Text style = {styles.prompt_text}>{rowDate.item[0].prompt}</Text>
-                   </View>
-                </View>
-            </TouchableOpacity>
-        );
-    }
+    // renderRow(rowDate) {
+    //     return (
+    //         <TouchableOpacity
+    //             activeOpacity={0.75}
+    //             onPress={() =>this._onPressFeedItem(rowDate) }
+    //             style={styles.center}
+    //             >
+    //             <View style = {styles.container}>
+    //                <Image style = {styles.image_left} source = {{uri: rowDate.url}} />
+    //                <View style = {styles.right_view}>
+    //                   <Text style = {styles.title}>{rowDate.name}</Text>
+    //                   <Text style = {styles.prompt_text}>{rowDate.item[0].prompt}</Text>
+    //                </View>
+    //             </View>
+    //         </TouchableOpacity>
+    //     );
+    // }
     _onPressFeedItem(rowDate) {
         InteractionManager.runAfterInteractions(() => {
             this.props.navigator.push({

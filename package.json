@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "react-native": "^0.30.0",
+    "react-native-swiper": "^1.5.4",
     "react-native-viewpager": "^0.2.13"
   }
 }

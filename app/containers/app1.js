@@ -19,6 +19,8 @@ class App extends React.Component {
                     configureScene={(route) => {
                         if (route.sceneConfig) {
                             return route.sceneConfig;
+                        } else if(route.name == 'ProductDetial'){
+                          return Navigator.SceneConfigs.FloatFromBottom;
                         }
                         return Navigator.SceneConfigs.FloatFromRight;
                     } }
